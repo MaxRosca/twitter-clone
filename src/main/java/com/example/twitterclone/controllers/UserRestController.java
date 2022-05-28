@@ -1,4 +1,4 @@
-package com.example.twitterclone;
+package com.example.twitterclone.controllers;
 
 import com.example.twitterclone.dao.UserDao;
 import com.example.twitterclone.entitites.User;
