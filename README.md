@@ -15,6 +15,7 @@ email to roscamaxim2002@gmail.com, I will be really happy to receive it and get 
 - [X] Hibernate
 - [X] Spring Boot
 - [X] Maven
+- [X] Lombok
 - [ ] AOP
 - [ ] Spring Security
 - [ ] React
