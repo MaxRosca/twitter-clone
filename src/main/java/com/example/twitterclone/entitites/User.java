@@ -2,8 +2,14 @@ package com.example.twitterclone.entitites;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="users")
+/**
+ * User entity class connected to database with Hibernate
+ *
+ * @author Rosca Maxim
+ */
+
+@Entity(name="user")
+@Table(name="user")
 public class User {
 
     @Id
@@ -11,10 +17,10 @@ public class User {
     @Column(name="id")
     private Integer id;
 
-    @Column(name="firstName")
+    @Column(name="first_name")
     private String firstName;
 
-    @Column(name="lastName")
+    @Column(name="last_name")
     private String lastName;
 
     @Column(name="email")
