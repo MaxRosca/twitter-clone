@@ -11,12 +11,14 @@ email to roscamaxim2002@gmail.com, I will be really happy to receive it and get 
 ### Current Implemented Technologies or principles
 - [X] Java
 - [X] OOP
-- [ ] Spring MVC
-- [ ] Hibernate
+- [X] Spring MVC
+- [X] Hibernate
+- [X] Spring Boot
+- [X] Maven
 - [ ] AOP
-- [ ] Spring Boot
-- [ ] Maven
 - [ ] Spring Security
+- [ ] React
+- [ ] Bootstrap or other front end library
 
 ### License: MIT
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
