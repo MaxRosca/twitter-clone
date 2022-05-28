@@ -2,10 +2,10 @@ package com.example.twitterclone.dao;
 
 import com.example.twitterclone.entitites.User;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -19,10 +19,13 @@ import java.util.List;
 
 public class UserDao implements IDao<User>{
 
-    // Make sure to define the bean for the SessionFactory
+    private final EntityManager entityManager;
+
+    // Using the Spring Boot EntityManager here
     @Autowired
-    private SessionFactory sessionFactory;
-    private List<User> users;
+    private UserDao(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     /**
      * Function that returns a User object with all the information from
@@ -33,7 +36,7 @@ public class UserDao implements IDao<User>{
      */
     @Override
     public User get(int id) {
-        Session currentSession = sessionFactory.getCurrentSession();
+        Session currentSession = entityManager.unwrap(Session.class);
         Query<User> query = currentSession.createQuery("FROM users WHERE id = " + id, User.class);
         return query.getSingleResult();
     }
@@ -46,10 +49,10 @@ public class UserDao implements IDao<User>{
      */
     @Override
     public List<User> getAll() {
-        Session currentSession = sessionFactory.getCurrentSession();
+        Session currentSession = entityManager.unwrap(Session.class);
         Query<User> query = currentSession.createQuery("FROM users", User.class);
-        this.users = query.getResultList();
-        return this.users;
+        List<User> users = query.getResultList();
+        return users;
     }
 
     /**
@@ -61,7 +64,7 @@ public class UserDao implements IDao<User>{
      */
     @Override
     public void save(User user) {
-        Session currentSession = sessionFactory.getCurrentSession();
+        Session currentSession = entityManager.unwrap(Session.class);
         currentSession.save(user);
     }
 
@@ -74,7 +77,7 @@ public class UserDao implements IDao<User>{
      */
     @Override
     public void update(User user) {
-        Session currentSession = sessionFactory.getCurrentSession();
+        Session currentSession = entityManager.unwrap(Session.class);
         currentSession.saveOrUpdate(user);
     }
 
@@ -86,7 +89,7 @@ public class UserDao implements IDao<User>{
      */
     @Override
     public void delete(int id) {
-        Session currentSession = sessionFactory.getCurrentSession();
+        Session currentSession = entityManager.unwrap(Session.class);
         currentSession.delete(get(id));
     }
 }
