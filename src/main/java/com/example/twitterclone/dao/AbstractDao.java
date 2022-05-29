@@ -2,7 +2,10 @@ package com.example.twitterclone.dao;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.dao.EmptyResultDataAccessException;
+
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -51,8 +54,12 @@ abstract class AbstractDao<T> {
     @Transactional
     public T get(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<T> query = currentSession.createQuery("FROM " + tableName + " WHERE id = " + id, tClass);
-        return query.getSingleResult();
+        try {
+            Query<T> query = currentSession.createQuery("FROM " + tableName + " WHERE id = " + id, tClass);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     /**
@@ -92,8 +99,9 @@ abstract class AbstractDao<T> {
         Session currentSession = entityManager.unwrap(Session.class);
         currentSession.saveOrUpdate(t);
     }
+
     /**
-     * Delete an object from the persistence mechanism based on it's unique identifier.
+     * Delete an object from the persistence mechanism based on its unique identifier.
      *
      * @param id the unique identifier of the object to be deleted
      */
@@ -102,4 +110,18 @@ abstract class AbstractDao<T> {
         Session currentSession = entityManager.unwrap(Session.class);
         currentSession.delete(get(id));
     }
+
+    /**
+     * Return the number of rows in the table
+     *
+     * @return the number of rows in the table
+     */
+    @Transactional
+    public Long count() {
+        Session currentSession = entityManager.unwrap(Session.class);
+        Query<Long> query = currentSession.createQuery("SELECT count(*) FROM " + tableName, Long.class);
+        Long count = query.uniqueResult();
+        return count;
+    }
+
 }

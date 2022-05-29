@@ -1,15 +1,10 @@
 package com.example.twitterclone.dao;
 
 import com.example.twitterclone.entitites.User;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
-import java.util.List;
+
 
 /**
  * Implementation of the DAO pattern, used to isolate the business logic from the
@@ -28,5 +23,4 @@ public class UserDao extends AbstractDao<User>{
     public UserDao(EntityManager entityManager) {
         super(entityManager, User.class, "user");
     }
-
 }
