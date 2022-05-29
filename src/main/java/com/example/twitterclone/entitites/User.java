@@ -1,9 +1,11 @@
 package com.example.twitterclone.entitites;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * User entity class connected to database with Hibernate
@@ -32,6 +34,10 @@ public class User {
     @Column(name="username")
     @Getter @Setter private String username;
 
+    @OneToMany(mappedBy="author", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JsonManagedReference
+    @Getter @Setter private List<Tweet> tweets;
+
     public User() {}
 
     public User(String firstName, String lastName, String email, String username) {
@@ -39,5 +45,15 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.username = username;
+    }
+
+    /**
+     * Function to add a tweet to the tweets list. Also, it sets the tweets author to this user.
+     *
+     * @param tweet the tweet to be added to the list
+     */
+    public void addTweet(Tweet tweet) {
+        this.tweets.add(tweet);
+        tweet.setAuthor(this);
     }
 }
