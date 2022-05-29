@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="tweet")
@@ -23,6 +24,10 @@ public class Tweet {
     @JoinColumn(name="author")
     @JsonBackReference
     @Getter @Setter User author;
+
+    @OneToMany(mappedBy="tweet", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JsonManagedReference
+    @Getter @Setter List<Comment> commentList;
 
     public Tweet(String content, User author) {
         this.content = content;

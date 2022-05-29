@@ -38,6 +38,10 @@ public class User {
     @JsonManagedReference
     @Getter @Setter private List<Tweet> tweets;
 
+    @OneToMany(mappedBy="author", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JsonManagedReference
+    @Getter @Setter private List<Comment> commentList;
+
     public User() {}
 
     public User(String firstName, String lastName, String email, String username) {

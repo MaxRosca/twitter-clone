@@ -16,6 +16,7 @@ email to roscamaxim2002@gmail.com, I will be really happy to receive it and get 
 - [X] Spring Boot
 - [X] Maven
 - [X] Lombok
+- [X] JUnit testing
 - [ ] AOP
 - [ ] Spring Security
 - [ ] React
