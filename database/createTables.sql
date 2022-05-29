@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS commentlike;
+DROP TABLE IF EXISTS comment_like;
 
 DROP TABLE IF EXISTS comment;
 
@@ -30,9 +30,10 @@ CREATE TABLE comment(
     FOREIGN KEY (tweet) REFERENCES tweet(id)
 );
 
-CREATE TABLE commentlike(
+CREATE TABLE comment_like(
     user int NOT NULL,
     tweet int NOT NULL,
     FOREIGN KEY (user) REFERENCES user(id),
     FOREIGN KEY (tweet) REFERENCES tweet(id)
 );
+

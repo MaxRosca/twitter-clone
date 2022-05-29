@@ -36,4 +36,14 @@ public class Tweet {
 
     public Tweet() {}
 
+    /**
+     * Function to add a comment to the comment list. Also, it sets the comment's tweet to this tweet.
+     *
+     * @param comment the tweet to be added to the list
+     */
+    public void addComment(Comment comment) {
+        this.commentList.add(comment);
+        comment.setTweet(this);
+    }
+
 }

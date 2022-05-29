@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="comment")
@@ -27,4 +28,11 @@ public class Comment {
     @JsonBackReference
     @Getter @Setter Tweet tweet;
 
+    @ManyToMany(fetch=FetchType.LAZY ,cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name="comment_like",
+            joinColumns = @JoinColumn(name="tweet"),
+            inverseJoinColumns = @JoinColumn(name = "user"))
+    @JsonBackReference
+    @Getter @Setter private List<User> likes;
 }

@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 
-
 /**
  * Implementation of the DAO pattern, used to isolate the business logic from the
  * persistence mechanism. The class uses Hibernate to manipulate data from the database.

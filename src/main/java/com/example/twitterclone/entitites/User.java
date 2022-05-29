@@ -1,5 +1,6 @@
 package com.example.twitterclone.entitites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,6 +43,14 @@ public class User {
     @JsonManagedReference
     @Getter @Setter private List<Comment> commentList;
 
+    @ManyToMany(fetch=FetchType.LAZY ,cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name="comment_like",
+            joinColumns = @JoinColumn(name="user"),
+            inverseJoinColumns = @JoinColumn(name = "tweet"))
+    @JsonBackReference
+    @Getter @Setter private List<Comment> likedComments;
+
     public User() {}
 
     public User(String firstName, String lastName, String email, String username) {
@@ -60,4 +69,15 @@ public class User {
         this.tweets.add(tweet);
         tweet.setAuthor(this);
     }
+
+    /**
+     * Function to add a comment to the comments list. Also, it sets the comment's author to this user.
+     *
+     * @param comment the comment to be added to the list
+     */
+    public void addComment(Comment comment) {
+        this.commentList.add(comment);
+        comment.setAuthor(this);
+    }
+
 }
