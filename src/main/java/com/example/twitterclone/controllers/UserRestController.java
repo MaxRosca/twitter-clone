@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Rest controller for manipulating user data. 
+ * Rest controller for manipulating user data.
  *
  * @author Rosca Maxim
  */
 
 @RestController
-@RequestMapping("/api/user/")
+@RequestMapping("/api/user")
 public class UserRestController {
 
     final UserDao dao;
@@ -28,8 +28,7 @@ public class UserRestController {
      *
      * @return the json format of all users from database
      */
-    @GetMapping("/")
-    @ResponseBody
+    @GetMapping("")
     List<User> getUsers() {
         return dao.getAll();
     }
@@ -42,7 +41,6 @@ public class UserRestController {
      * @return the information about the user with the provided id as json
      */
     @GetMapping("/{id}")
-    @ResponseBody
     User getUser(@PathVariable(value="id") Integer id) {
         return dao.get(id);
     }
@@ -55,7 +53,6 @@ public class UserRestController {
      * @param id the id of the user to be deleted
      */
     @DeleteMapping("/{id}")
-    @ResponseBody
     void deleteUser(@PathVariable(value="id") Integer id) {
         dao.delete(id);
     }
@@ -67,8 +64,7 @@ public class UserRestController {
      *
      * @param user the user that needs to be added
      */
-    @PutMapping("/add")
-    @ResponseBody
+    @PutMapping("")
     void addUser(@RequestBody User user) {
         user.setId(null);
         dao.save(user);
@@ -81,8 +77,7 @@ public class UserRestController {
      *
      * @param user the object with the updated information
      */
-    @PostMapping("/update")
-    @ResponseBody
+    @PostMapping("")
     void updateUser(@RequestBody User user) {
         dao.update(user);
     }

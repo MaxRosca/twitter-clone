@@ -3,6 +3,7 @@ package com.example.twitterclone.dao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
